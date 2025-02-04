@@ -13,6 +13,8 @@
 
 ## Assumptions
 
+-   I am assuming that the messages I get from the DB are always with the newest messages last
+
 ## Implemented Features
 
 -   [x] Initial load
@@ -24,6 +26,7 @@
 -   [] Jump to bottom on load
 -   [] Separate messages by date
 -   [] Sticky date headers
+-   [] Add message user name
 -   [x] Separate message between user and bot
 -   [x] Show timestamp in messages
 

@@ -15,6 +15,7 @@ export default {
                 foreground: "var(--foreground)",
                 "bot-message": "#3730a3",
                 "user-message": "#374151",
+                "message-divider": "#1f2937",
             },
         },
     },
