@@ -4,7 +4,8 @@ import { Spinner } from "@heroui/spinner";
 const Loading = () => {
     return (
         <div className="flex flex-col items-center">
-            <Spinner></Spinner>loading messages
+            <Spinner />
+            loading messages
         </div>
     );
 };

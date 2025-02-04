@@ -19,15 +19,19 @@
 -   [x] Fetch messages from API
 -   [x] Show loading screen
 -   [x] Handle error on fetch
+-   [x] Show list of messages
 -   [] Jump to bottom button
+-   [] Jump to bottom on load
+-   [] Separate messages by date
 -   [] Sticky date headers
--   [] Show list of messages
--   [] Separate message between user and bot
--   [] Show timestamp in messages
+-   [x] Separate message between user and bot
+-   [x] Show timestamp in messages
 
 ## Technical Decisions
 
 ## Known Problems
+
+-   [] Need to add logic to handle local time
 
 ## Author
 
