@@ -15,13 +15,7 @@ const page = async () => {
 
     console.log("🚀 ~ file: messages.tsx:7 ~ messages ~ data:", data);
 
-    return (
-        <>
-            <Suspense fallback={<Loading></Loading>}>
-                <div className={styles.page}>messages</div>
-            </Suspense>
-        </>
-    );
+    return <Suspense fallback={<Loading></Loading>}>messages</Suspense>;
 };
 
 export default page;

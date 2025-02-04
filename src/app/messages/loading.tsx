@@ -1,8 +1,12 @@
 import React from "react";
-import styles from "./page.module.css";
+import { Spinner } from "@heroui/spinner";
 
 const Loading = () => {
-    return <div className={styles.page}>loading messages</div>;
+    return (
+        <div className="flex flex-col items-center">
+            <Spinner></Spinner>loading messages
+        </div>
+    );
 };
 
 export default Loading;

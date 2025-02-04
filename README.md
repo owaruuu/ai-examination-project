@@ -15,9 +15,15 @@
 
 ## Implemented Features
 
--   [] Initial load
--   [] Fetch messages from API
--   [] Handle error on fetch
+-   [x] Initial load
+-   [x] Fetch messages from API
+-   [x] Show loading screen
+-   [x] Handle error on fetch
+-   [] Jump to bottom button
+-   [] Sticky date headers
+-   [] Show list of messages
+-   [] Separate message between user and bot
+-   [] Show timestamp in messages
 
 ## Technical Decisions
 

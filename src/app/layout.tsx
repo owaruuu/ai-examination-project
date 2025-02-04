@@ -27,7 +27,9 @@ export default function RootLayout({
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
-                {children}
+                <div className="grid items-center justify-items-center min-h-screen">
+                    {children}
+                </div>
             </body>
         </html>
     );
