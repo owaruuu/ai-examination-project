@@ -13,14 +13,12 @@ const page = async () => {
         throw new Error("No messages found");
     }
 
-    console.log("🚀 ~ file: messages.tsx:7 ~ messages ~ data:", data.data);
-
     return (
         <Suspense fallback={<Loading />}>
             <div className="max-h-screen max-w-3xl w-10/12 grid grid-rows-[90%_1fr] items-center bg-chat-background">
                 <Messages messages={data.data}></Messages>
-                <div className="flex flex-col items-center justify-items-center">
-                    messages footer
+                <div className="h-full flex flex-col items-center justify-items-center border-t-2">
+                    Messages footer for later use
                 </div>
             </div>
         </Suspense>

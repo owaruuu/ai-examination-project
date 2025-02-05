@@ -4,6 +4,7 @@ import { message } from "@/app/types";
 import { checkDates, getHour } from "@/helpers";
 import Divider from "./divider";
 import FloatingDivider from "./floatingDivider";
+import DownArrow from "./downArrow";
 
 type props = {
     messages: [message];
@@ -15,9 +16,17 @@ const Messages = (props: props) => {
     const parentRef = useRef<HTMLDivElement | null>(null);
     const childrenRef = useRef<(HTMLDivElement | null)[]>([]);
     const [floatingDate, setFloatingDate] = useState<string | null>("null");
-    console.log("🚀 ~ Messages ~ childrenRef:", childrenRef);
-    const [positions, setPositions] = useState<number[]>([]);
-    console.log("🚀 ~ Messages ~ positions:", positions);
+    const [atBottom, setAtBottom] = useState(false);
+
+    function scrollToBottom() {
+        if (parentRef.current) {
+            parentRef.current.scrollTo(0, parentRef.current.scrollHeight);
+        }
+    }
+
+    useEffect(() => {
+        scrollToBottom();
+    }, []);
 
     useEffect(() => {
         const checkPositions = () => {
@@ -27,34 +36,43 @@ const Messages = (props: props) => {
 
             for (const child of childrenRef.current) {
                 const offset = child?.getBoundingClientRect().top;
-                console.log("🚀 ~ checkPositions ~ offset:", offset);
                 if (offset === undefined) {
-                    console.log("offset is undefined, continuing");
-
                     continue;
                 }
 
                 if (offset >= 25) break;
 
                 nextDate = child?.textContent ?? "";
-                console.log("🚀 ~ checkPositions ~ nextDate:", nextDate);
             }
 
-            const newPositions = childrenRef.current.map(
-                (child) => child?.getBoundingClientRect().top ?? 0
-            );
             setFloatingDate(nextDate);
-            setPositions(newPositions);
+        };
+
+        const checkBottom = () => {
+            if (!parentRef.current) return;
+
+            setAtBottom(isAtBottom(parentRef.current));
+        };
+
+        const isAtBottom = (container: HTMLDivElement | null) => {
+            if (!container) return false;
+            return (
+                container.scrollTop + container.clientHeight >=
+                container.scrollHeight
+            );
         };
 
         checkPositions();
+        checkBottom();
 
         const parent = parentRef?.current;
 
         parent?.addEventListener("scroll", checkPositions);
+        parent?.addEventListener("scroll", checkBottom);
 
         return () => {
             parent?.removeEventListener("scroll", checkPositions);
+            parent?.removeEventListener("scroll", checkBottom);
         };
     }, []);
 
@@ -101,10 +119,11 @@ const Messages = (props: props) => {
     return (
         <div
             ref={parentRef}
-            className="overflow-scroll overflow-x-auto max-h-full flex flex-col  p-5"
+            className="scroll-smooth overflow-scroll overflow-x-auto max-h-full flex flex-col p-5"
         >
             <FloatingDivider content={floatingDate} />
             {messagesComponent}
+            {!atBottom && <DownArrow fn={scrollToBottom} />}
         </div>
     );
 };
