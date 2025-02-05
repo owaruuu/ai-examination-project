@@ -1,4 +1,6 @@
 import { heroui } from "@heroui/theme";
+import scrollbar from "tailwind-scrollbar";
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -21,5 +23,5 @@ export default {
             },
         },
     },
-    plugins: [heroui()],
+    plugins: [heroui(), scrollbar({ nocompatible: true })],
 } satisfies Config;

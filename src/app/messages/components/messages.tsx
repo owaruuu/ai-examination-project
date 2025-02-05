@@ -119,9 +119,9 @@ const Messages = (props: props) => {
     return (
         <div
             ref={parentRef}
-            className="scroll-smooth overflow-scroll overflow-x-auto max-h-full flex flex-col p-5"
+            className="scroll-smooth scrollbar scrollbar-w-3 scrollbar-thumb-gray-700 scrollbar-thumb-rounded-full overflow-scroll overflow-x-auto max-h-full flex flex-col p-5 mx-1"
         >
-            <FloatingDivider content={floatingDate} />
+            {floatingDate && <FloatingDivider content={floatingDate} />}
             {messagesComponent}
             {!atBottom && <DownArrow fn={scrollToBottom} />}
         </div>
