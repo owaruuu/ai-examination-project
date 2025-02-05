@@ -18,7 +18,7 @@
 *   Run `npm i`
 *   Add `NEXT_PUBLIC_BASE_URL=http://localhost:3000` to a .env.local file for testing
 *   Run `npm run dev`
-*   Go To https://localhost:3000/messages
+*   Go To http://localhost:3000/messages
 
 ## Assumptions
 
