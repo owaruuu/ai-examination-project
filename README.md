@@ -31,7 +31,7 @@
 -   [x] Fetch messages from API
 -   [x] Show loading screen
 -   [x] Handle error on fetch
--   [] Show a more useful message on error
+-   [ ] Show a more useful message on error
 -   [x] Show list of messages
 -   [x] Sticky jump to bottom button
 -   [x] Jump to bottom button function
@@ -52,7 +52,7 @@
 
 ## Known Problems
 
--   [] Need to add logic to handle local time
+-   [ ] Need to add logic to handle local time
 -   [x] Fix date footer inside messages to have leading 0s
 -   [x] Fix bug when showing date dividers, it is showing 'yesterday' two times in a row
 -   [x] Fix the bug with 'this week' since it is just calculating 7 days difference but not if it is inside the week
