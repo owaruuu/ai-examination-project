@@ -18,10 +18,11 @@ export function getHour(dateString: string): string {
 }
 
 /**
- * Compares two dates to determine if the day has changed since the last message
- * @param lastDate the date of the previous message processed
- * @param messageDate the date of the current message being processed
- * @returns
+ * Compares two dates to determine if the day has changed since the last message, if it has changed
+ * determine what to put in the divider
+ * @param {string} lastDate the date in string format of the previous message processed
+ * @param {string} messageDate the date in string format of the current message being processed
+ * @returns {string} the text that the divider will display
  */
 export function checkDates(
     lastDate: string | null,
@@ -30,7 +31,7 @@ export function checkDates(
     // const todayString = new Date().toISOString();
 
     //fake today date for testing, based on the newest message date I get from the API
-    const todayString = new Date("2024-03-14" + "T23:59:59Z").toISOString();
+    const todayString = new Date("2024-03-14" + "T00:00:00Z").toISOString();
     const startWeek = getStartOfWeek(todayString).toISOString();
     const timeUntilPreviousWeek = getDifference(todayString, startWeek);
 
@@ -63,6 +64,12 @@ export function checkDates(
     return null;
 }
 
+/**
+ * Get the difference between two dates, it converts them to UTC dates at midnight first
+ * @param newerDate the newer (bigger number) date in string format
+ * @param olderDate the older date (smaller number) date in string format
+ * @returns
+ */
 function getDifference(newerDate: string, olderDate: string) {
     const dateObject1 = getMidnightUTCDate(newerDate);
     const dateObject2 = getMidnightUTCDate(olderDate);
@@ -73,6 +80,13 @@ function getDifference(newerDate: string, olderDate: string) {
     return difference;
 }
 
+/**
+ * Get the string for the date divider
+ * @param {number} difference amount of difference between today and the message's date
+ * @param {string} date the message's date in string format for when it's needed to show the full date in the divider
+ * @param {number} timeUntilPreviousWeek the amount of time until it's not this week
+ * @returns {string} the text for the divider
+ */
 function getDividerString(
     difference: number,
     date: string,
@@ -89,6 +103,11 @@ function getDividerString(
     }
 }
 
+/**
+ * Convert the date to midnight UTC to be able to compare dates and know if a full day has passed
+ * @param {string} dateString the date in string format
+ * @returns {Date} a new date converted to midnight UTC
+ */
 function getMidnightUTCDate(dateString: string): Date {
     const date = new Date(dateString);
     return new Date(
@@ -96,7 +115,12 @@ function getMidnightUTCDate(dateString: string): Date {
     );
 }
 
-function getStartOfWeek(date: string) {
+/**
+ * Gets the date of the first day of the week of a given date
+ * @param {string} date a random date
+ * @returns {Date} midnight UTC monday of the given date
+ */
+function getStartOfWeek(date: string): Date {
     const givenDate = getMidnightUTCDate(date);
     const day = givenDate.getDay();
     const startWeek = new Date(givenDate);

@@ -7,13 +7,18 @@
 -   [Implemented Features](#implemented-features)
 -   [Technical Decisions](#technical-decisions)
 -   [Known Problems](#known-problems)
+-   [Areas for Improvement](#areas-for-improvement)
 -   [Author](#author)
 
 ## Setup Instructions
 
--   Clone repo
--   Run `npm i`
--   Run `npm run dev`
+-   Made with Node v20.18.0 and Npm v11.1.0
+
+*   Clone repo
+*   Run `npm i`
+*   Add `NEXT_PUBLIC_BASE_URL=http://localhost:3000` to a .env.local file for testing
+*   Run `npm run dev`
+*   Go To https://localhost:3000/messages
 
 ## Assumptions
 
@@ -51,8 +56,15 @@
 -   [x] Fix date footer inside messages to have leading 0s
 -   [x] Fix bug when showing date dividers, it is showing 'yesterday' two times in a row
 -   [x] Fix the bug with 'this week' since it is just calculating 7 days difference but not if it is inside the week
--   [] Implement better queries
--   [] Add animation on show to 'jump to bottom button'
+
+## Areas for Improvement
+
+-   Implement a redirect or move the messages to the home page
+-   Hide floating divider after a while
+-   Add onClick to the divider to jump to that 'date'
+-   Separate the messages into conversations if the message has 'reply_to_id: null'
+-   Implement better queries
+-   Add animation on show to 'jump to bottom button'
 
 ## Author
 
