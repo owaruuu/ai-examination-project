@@ -3,6 +3,7 @@ import React from "react";
 import { message } from "@/app/types";
 import { checkDates, getHour } from "@/helpers";
 import Divider from "./divider";
+import FloatingDivider from "./floatingDivider";
 
 type props = {
     messages: [message];
@@ -46,6 +47,7 @@ const messages = (props: props) => {
     });
     return (
         <div className="overflow-scroll overflow-x-auto max-h-full flex flex-col  p-5">
+            <FloatingDivider content="null" />
             {messagesComponent}
         </div>
     );
