@@ -1,21 +1,22 @@
 "use client";
-import React from "react";
+import React, { forwardRef } from "react";
 
 type props = {
     messageDate: string | null;
-    id: number;
 };
 
-const Divider = (props: props) => {
-    const { messageDate, id } = props;
+const Divider = forwardRef<HTMLDivElement, props>((props: props, ref) => {
+    const { messageDate } = props;
     return (
         <div
-            key={id}
+            ref={ref}
             className="bg-message-divider rounded-xl px-4 py-2 m-1 place-self-center"
         >
             {messageDate}
         </div>
     );
-};
+});
+
+Divider.displayName = "Divider";
 
 export default Divider;

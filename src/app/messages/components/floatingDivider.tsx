@@ -1,7 +1,7 @@
 import React from "react";
 
 type props = {
-    content: string;
+    content: string | null;
 };
 
 const FloatingDivider = (props: props) => {
