@@ -12,7 +12,9 @@ type props = {
 
 const Messages = (props: props) => {
     const { messages } = props;
+    console.log("🚀 ~ Messages ~ messages:", messages);
     let lastDate: string | null = null;
+    let lastDateString: string | null = null;
     const parentRef = useRef<HTMLDivElement | null>(null);
     const childrenRef = useRef<(HTMLDivElement | null)[]>([]);
     const [floatingDate, setFloatingDate] = useState<string | null>("null");
@@ -78,7 +80,18 @@ const Messages = (props: props) => {
 
     const messagesComponent = messages.map((m: message, index: number) => {
         //date check
-        const dateString = checkDates(lastDate, m.message_date);
+        let dateString = checkDates(lastDate, m.message_date);
+
+        //special case for messages that are between 2 days and 7 days old
+        //if the divider 'this week' has already been shown skip it
+        if (dateString === lastDateString) {
+            dateString = null;
+        } else {
+            if (dateString) {
+                //neccessary since the array is filled with nulls for now
+                lastDateString = dateString;
+            }
+        }
 
         lastDate = m.message_date;
 

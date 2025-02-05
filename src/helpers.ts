@@ -1,35 +1,61 @@
 const second = 1000;
-const minute = second * 60;
-const hour = minute * 60;
-const day = hour * 24;
-const week = day * 7;
+const minute = second * 60; //60,000
+const hour = minute * 60; //3,600,000
+const day = hour * 24; //86,400,000
+const week = day * 7; //604,800,000
 
+/**
+ * Get the hour of the date in the follwing format 'hh:mm'
+ * @param {string} dateString the date in ISO string format
+ * @returns {string}
+ */
 export function getHour(dateString: string): string {
     const date = new Date(dateString);
-    const hour = date.getHours();
-    const minutes = date.getMinutes();
+    const hour = String(date.getHours()).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+
     return `${hour}:${minutes}`;
 }
 
+/**
+ * Compares two dates to determine if the day has changed since the last message
+ * @param lastDate the date of the previous message processed
+ * @param messageDate the date of the current message being processed
+ * @returns
+ */
 export function checkDates(
     lastDate: string | null,
     messageDate: string
 ): string | null {
-    const todayString = new Date().toISOString();
-    // const todayString = new Date("2024-03-14" + "T00:00:00Z").toISOString();
-    let differenceWithToday = getDifference(todayString, messageDate);
+    // const todayString = new Date().toISOString();
 
+    //fake today date for testing, based on the newest message date I get from the API
+    const todayString = new Date("2024-03-14" + "T23:59:59Z").toISOString();
+    const startWeek = getStartOfWeek(todayString).toISOString();
+    const timeUntilPreviousWeek = getDifference(todayString, startWeek);
+
+    //get the amount of time difference from today to the date of the message
+    //get it now since it is used in both places
+    const differenceWithToday = getDifference(todayString, messageDate);
+
+    //if no lastDate is provided just return the date from the message
+    //this means it is the first message being processed
     if (!lastDate) {
-        differenceWithToday = getDifference(todayString, messageDate);
-        return getDividerString(differenceWithToday, messageDate);
+        return getDividerString(
+            differenceWithToday,
+            messageDate,
+            timeUntilPreviousWeek
+        );
     } else {
         //get difference to know if a day has passed since the last message
         const differenceWithPreviousDay = getDifference(messageDate, lastDate);
 
         if (differenceWithPreviousDay >= day) {
+            //get difference from today to know what to show in divider
             return getDividerString(
-                getDifference(todayString, messageDate), //get difference from today to know what to show in divider
-                messageDate
+                differenceWithToday,
+                messageDate,
+                timeUntilPreviousWeek
             );
         }
     }
@@ -47,10 +73,14 @@ function getDifference(newerDate: string, olderDate: string) {
     return difference;
 }
 
-function getDividerString(difference: number, date: string) {
-    if (difference > week) {
+function getDividerString(
+    difference: number,
+    date: string,
+    timeUntilPreviousWeek: number
+) {
+    if (difference > timeUntilPreviousWeek) {
         return new Date(date).toLocaleDateString();
-    } else if (difference > day * 2) {
+    } else if (difference >= day * 2) {
         return "this week";
     } else if (difference >= day) {
         return "yesterday";
@@ -64,4 +94,12 @@ function getMidnightUTCDate(dateString: string): Date {
     return new Date(
         Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate())
     );
+}
+
+function getStartOfWeek(date: string) {
+    const givenDate = getMidnightUTCDate(date);
+    const day = givenDate.getDay();
+    const startWeek = new Date(givenDate);
+    startWeek.setDate(startWeek.getDate() - day);
+    return startWeek;
 }

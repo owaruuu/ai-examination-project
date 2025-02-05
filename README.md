@@ -41,13 +41,16 @@
 ## Technical Decisions
 
 -   When calculating dates always use UTC dates
+-   Show dates and timestamps in local time zone
 -   Stay with tailwind v3 because of time limit
 -   Since all the messages are from the same number, no chat separation was made
 
 ## Known Problems
 
 -   [] Need to add logic to handle local time
--   [] Fix date footer inside messages to have leading 0s
+-   [x] Fix date footer inside messages to have leading 0s
+-   [x] Fix bug when showing date dividers, it is showing 'yesterday' two times in a row
+-   [x] Fix the bug with 'this week' since it is just calculating 7 days difference but not if it is inside the week
 -   [] Implement better queries
 -   [] Add animation on show to 'jump to bottom button'
 
