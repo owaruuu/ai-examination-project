@@ -84,16 +84,16 @@ const Messages = (props: props) => {
 
         //bot or user
         let classString =
-            "p-4 pt-2 m-1 rounded-md min-w-24 max-w-md flex flex-col";
+            "p-2 md:p-4 pt-2 m-1 rounded-md min-w-24 max-w-md flex flex-col";
         const userName =
             m.bot_sender === 1 ? "AI agent" : `+${m.sender_number}`;
-        let userNameClassString = "font-bold";
+        let userNameClassString = "font-bold text-sm md:text-base";
 
         if (m.bot_sender === 1) {
-            classString += " bg-bot-message self-end";
+            classString += " bg-bot-message self-end ml-5";
             userNameClassString += " self-end";
         } else {
-            classString += " bg-user-message self-start";
+            classString += " bg-user-message self-start mr-5";
         }
 
         return (
@@ -108,8 +108,8 @@ const Messages = (props: props) => {
 
                 <div key={m.id} className={classString}>
                     <p className={userNameClassString}>{userName}</p>
-                    <p>{m.message_text}</p>
-                    <p className="text-xs self-end">
+                    <p className="text-xs md:text-sm">{m.message_text}</p>
+                    <p className="text-xs self-end text-hour-text">
                         {getHour(m.message_date)}
                     </p>
                 </div>

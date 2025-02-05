@@ -10,7 +10,7 @@ const Divider = forwardRef<HTMLDivElement, props>((props: props, ref) => {
     return (
         <div
             ref={ref}
-            className="bg-message-divider rounded-xl px-4 py-2 m-1 place-self-center"
+            className="bg-message-divider rounded-xl px-4 py-2 m-10 md:m-2 place-self-center text-sm md:text-base"
         >
             {messageDate}
         </div>
