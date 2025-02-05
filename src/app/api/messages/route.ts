@@ -3,7 +3,7 @@ export const dynamic = "force-static";
 
 export async function GET() {
     const res = await fetch(
-        "http://www.backup-backend.readychatai.com/messages_jsonBAD"
+        "http://www.backup-backend.readychatai.com/messages_json"
     );
 
     if (!res.ok) {
