@@ -1,16 +1,21 @@
+"use client";
 import React from "react";
 
 type props = {
-    messageDate: string;
+    messageDate: string | null;
+    id: number;
 };
 
-const divider = (props: props) => {
-    const messageData = props.messageDate;
+const Divider = (props: props) => {
+    const { messageDate, id } = props;
     return (
-        <div className="bg-message-divider rounded-xl px-4 py-2 my-8 mx-20 place-self-center">
-            {messageData}
+        <div
+            key={id}
+            className="bg-message-divider rounded-xl px-4 py-2 m-1 place-self-center"
+        >
+            {messageDate}
         </div>
     );
 };
 
-export default divider;
+export default Divider;

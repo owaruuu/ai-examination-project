@@ -14,35 +14,54 @@ export function getHour(dateString: string): string {
 export function checkDates(
     lastDate: string | null,
     messageDate: string
-): string {
-    //ej. return 'ayer'
-    const today = new Date();
+): string | null {
+    const todayString = new Date().toISOString();
+    // const todayString = new Date("2024-03-14" + "T00:00:00Z").toISOString();
+    let differenceWithToday = getDifference(todayString, messageDate);
 
     if (!lastDate) {
-        const difference = getDifference(today.toISOString(), messageDate);
-        return getDividerString(difference);
+        differenceWithToday = getDifference(todayString, messageDate);
+        return getDividerString(differenceWithToday, messageDate);
+    } else {
+        //get difference to know if a day has passed since the last message
+        const differenceWithPreviousDay = getDifference(messageDate, lastDate);
+
+        if (differenceWithPreviousDay >= day) {
+            return getDividerString(
+                getDifference(todayString, messageDate), //get difference from today to know what to show in divider
+                messageDate
+            );
+        }
     }
 
-    const todayString = today.toISOString();
-
-    return "null";
+    return null;
 }
 
 function getDifference(newerDate: string, olderDate: string) {
-    const dateObject1 = new Date(newerDate);
-    const dateObject2 = new Date(olderDate);
-    const difference = dateObject1.getTime() - dateObject2.getTime();
+    const dateObject1 = getMidnightUTCDate(newerDate);
+    const dateObject2 = getMidnightUTCDate(olderDate);
+    const date1Time = dateObject1.getTime();
+    const date2Time = dateObject2.getTime();
+
+    const difference = date1Time - date2Time;
     return difference;
 }
 
-function getDividerString(difference: number) {
+function getDividerString(difference: number, date: string) {
     if (difference > week) {
-        return "fecha completa";
+        return new Date(date).toLocaleDateString();
     } else if (difference > day * 2) {
         return "this week";
-    } else if (difference > day) {
+    } else if (difference >= day) {
         return "yesterday";
     } else {
         return "today";
     }
+}
+
+function getMidnightUTCDate(dateString: string): Date {
+    const date = new Date(dateString);
+    return new Date(
+        Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate())
+    );
 }

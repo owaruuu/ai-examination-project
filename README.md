@@ -24,7 +24,7 @@
 -   [x] Show list of messages
 -   [] Jump to bottom button
 -   [] Jump to bottom on load
--   [] Separate messages by date
+-   [x] Separate messages by date
 -   [] Sticky date headers
 -   [] Add message user name
 -   [x] Separate message between user and bot
@@ -35,6 +35,7 @@
 ## Known Problems
 
 -   [] Need to add logic to handle local time
+-   [] Fix date footer inside messages to have leading 0s
 
 ## Author
 

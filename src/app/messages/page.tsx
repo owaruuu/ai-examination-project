@@ -17,7 +17,7 @@ const page = async () => {
 
     return (
         <Suspense fallback={<Loading />}>
-            <div className="max-h-screen w-10/12 grid grid-rows-[90%_1fr] items-center">
+            <div className="max-h-screen max-w-3xl w-10/12 grid grid-rows-[90%_1fr] items-center bg-chat-background">
                 <Messages messages={data.data}></Messages>
                 <div className="flex flex-col items-center justify-items-center">
                     messages footer

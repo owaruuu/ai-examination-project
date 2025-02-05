@@ -13,6 +13,7 @@ export default {
             colors: {
                 background: "var(--background)",
                 foreground: "var(--foreground)",
+                "chat-background": "#141414",
                 "bot-message": "#3730a3",
                 "user-message": "#374151",
                 "message-divider": "#1f2937",
