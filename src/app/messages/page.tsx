@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import React, { Suspense } from "react";
 import Messages from "./components/messages";
 import Loading from "./loading";
