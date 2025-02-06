@@ -2,7 +2,7 @@ const second = 1000;
 const minute = second * 60; //60,000
 const hour = minute * 60; //3,600,000
 const day = hour * 24; //86,400,000
-const week = day * 7; //604,800,000
+// const week = day * 7; //604,800,000
 
 /**
  * Get the hour of the date in the follwing format 'hh:mm'
