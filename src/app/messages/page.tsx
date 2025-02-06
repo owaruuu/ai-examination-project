@@ -3,7 +3,9 @@ import Messages from "./components/messages";
 import Loading from "./loading";
 
 const page = async () => {
-    const response = await fetch(`/api/messages`);
+    const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/messages`
+    );
 
     const data = await response.json();
 
