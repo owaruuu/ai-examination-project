@@ -8,13 +8,19 @@ const page = async () => {
     const response = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/messages`
     );
+    console.log("🚀 ~ page ~ response:", response);
 
     if (!response) {
+        console.log("error que nose");
+
         throw new Error("Failed to fetch data");
     }
     const data = await response.json();
+    console.log("🚀 ~ page ~ data:", data);
 
     if (!data.data) {
+        console.log("error con la api");
+
         throw new Error("No messages found");
     }
 
