@@ -113,7 +113,9 @@ const Messages = (props: props) => {
             <>
                 {dateString && (
                     <Divider
-                        ref={(el) => (childrenRef.current[index] = el)}
+                        ref={(el) => {
+                            childrenRef.current[index] = el;
+                        }}
                         messageDate={dateString}
                         key={`${m.id}-divider`}
                     />
