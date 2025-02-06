@@ -33,7 +33,7 @@ You can see the project in action at [Live-Demo](https://ai-examination-project-
 -   [x] Fetch messages from API
 -   [x] Show loading screen
 -   [x] Handle error on fetch
--   [ ] Show a more useful message on error
+-   [x] Show a more useful message on error
 -   [x] Show list of messages
 -   [x] Sticky jump to bottom button
 -   [x] Jump to bottom button function
@@ -47,6 +47,7 @@ You can see the project in action at [Live-Demo](https://ai-examination-project-
 
 ## Technical Decisions
 
+-   I am using a fake date to be able to show the 'today', 'yesterday', etc. date dividers, but it works with the current date too.
 -   When calculating dates always use UTC dates
 -   Show dates and timestamps in local time zone
 -   Stay with tailwind v3 because of time limit
