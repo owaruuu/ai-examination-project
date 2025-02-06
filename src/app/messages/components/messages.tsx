@@ -12,7 +12,6 @@ type props = {
 
 const Messages = (props: props) => {
     const { messages } = props;
-    console.log("🚀 ~ Messages ~ messages:", messages);
     let lastDate: string | null = null;
     let lastDateString: string | null = null;
     const parentRef = useRef<HTMLDivElement | null>(null);

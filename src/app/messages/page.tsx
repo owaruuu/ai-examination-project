@@ -1,4 +1,3 @@
-"use client";
 import React, { Suspense } from "react";
 import Messages from "./components/messages";
 import Loading from "./loading";
