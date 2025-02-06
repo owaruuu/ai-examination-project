@@ -1,5 +1,7 @@
 # Examination Project
 
+You can see the project in action at [Live-Demo](https://ai-examination-project-nu.vercel.app/messages)
+
 ## Table of contents
 
 -   [Setup Instructions](#setup-instructions)
