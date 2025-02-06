@@ -12,11 +12,11 @@ type props = {
 
 const Messages = (props: props) => {
     const { messages } = props;
-    let lastDate: string | null = null;
-    let lastDateString: string | null = null;
-    const parentRef = useRef<HTMLDivElement | null>(null);
-    const childrenRef = useRef<(HTMLDivElement | null)[]>([]);
-    const [floatingDate, setFloatingDate] = useState<string | null>("null");
+    let lastDate: string | null = null; // a reference to the last date processed
+    let lastDateString: string | null = null; // a reference to the last 'yesterday', 'this week' rendered
+    const parentRef = useRef<HTMLDivElement | null>(null); // a reference to this element to be able to scroll to the bottom and calculate the position of the scroll
+    const childrenRef = useRef<(HTMLDivElement | null)[]>([]); // a reference to every date divider
+    const [floatingDate, setFloatingDate] = useState<string | null>("null"); // the text of the floating date
     const [atBottom, setAtBottom] = useState(false);
 
     function scrollToBottom() {
@@ -30,6 +30,8 @@ const Messages = (props: props) => {
     }, []);
 
     useEffect(() => {
+        // cycle through the date dividers to find the 'first' one that is not above 25
+        // eg. if I have [-100, -54, 12, 30, 100] I want the '12' since that is going to be the 'date' that shows in the next divider going up the screen
         const checkPositions = () => {
             if (!parentRef.current) return;
 
@@ -38,7 +40,7 @@ const Messages = (props: props) => {
             for (const child of childrenRef.current) {
                 const offset = child?.getBoundingClientRect().top;
                 if (offset === undefined) {
-                    continue;
+                    continue; // since the array of children references has lots of empty references I need to skip those to avoid bugs
                 }
 
                 if (offset >= 25) break;
@@ -49,6 +51,7 @@ const Messages = (props: props) => {
             setFloatingDate(nextDate);
         };
 
+        // check if I am at the bottom of the messages list to hide the jump to bottom button
         const checkBottom = () => {
             if (!parentRef.current) return;
 
@@ -77,6 +80,7 @@ const Messages = (props: props) => {
         };
     }, []);
 
+    // map the messages array from the API to make the components
     const messagesComponent = messages.map((m: message, index: number) => {
         //date check
         let dateString = checkDates(lastDate, m.message_date);
@@ -119,7 +123,6 @@ const Messages = (props: props) => {
                         key={`${m.id}-divider`}
                     />
                 )}
-
                 <div key={m.id} className={classString}>
                     <p className={userNameClassString}>{userName}</p>
                     <p className="text-xs md:text-sm">{m.message_text}</p>
